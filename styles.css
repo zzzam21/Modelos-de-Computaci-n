@@ -1,0 +1,172 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.col {
+    padding: auto;
+    padding-bottom: 5px;
+}
+
+.table {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+p, label, th, td, button{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+th {
+    background-color: #FF4B44;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 3px solid #FF4B44;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+input[type="text"] {
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #FF4B44;
+    box-shadow: 0 0 5px rgba(255, 75, 68, 0.3);
+}
+
+button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #FF4B44;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #E63C35;
+}
+
+button:active {
+    background-color: #D42D24;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.edit-btn, .delete-btn {
+    padding: 8px 12px;
+    margin: 0;
+    font-size: 12px;
+}
+
+th,tr {
+    text-align: center;
+}
+.club-cell{
+    text-align: left;
+}
+.delete-btn {
+    background-color: #e74c3c;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.delete-btn:active {
+    background-color: #a93226;
+}
+
+dialog {
+    border: 0px;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 500px;
+    background-color: white;
+    width: 500px;
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+dialog .col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+dialog label {
+    display: block;
+}
+
+dialog input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header {
+    text-align: center;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.add {
+    background-color: #1b5e20;
+}
+
+.add:hover {
+    background-color: #218838;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
