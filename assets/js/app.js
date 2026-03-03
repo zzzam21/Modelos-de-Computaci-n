@@ -15,14 +15,13 @@ async function listMatches() {
         
         const data = await response.json();
         
-        
         const matches = Array.isArray(data) ? data : data.datos;
         
         if (!matches || matches.length === 0) {
             tableMatches.innerHTML = "<tr><td colspan='11'>No hay datos</td></tr>";
             return;
         }
-         
+
         var $i = 1;
         tableMatches.innerHTML = "";
 

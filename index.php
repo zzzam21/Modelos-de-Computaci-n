@@ -8,8 +8,6 @@
 </head>
 <body>
 
-    <?php include 'connectiondb.php';?>
-
     <div class="container">
         
         <div class="col">
