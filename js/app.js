@@ -32,7 +32,7 @@ async function listMatches() {
                 <td>${$i++}</td>
                 <td class="club-cell"><img src="${match.logo}" alt="logo" width="15px"> ${match.Club}</td>
                 <td>${match.played_games}</td>
-                <td>${match.goals}</td>
+                <td>${match.wins}</td>
                 <td>${match.draws}</td>
                 <td>${match.lost}</td>
                 <td>${match.goals_in_favor}</td>
@@ -107,13 +107,13 @@ async function saveTeamEdits(event) {
     const clubName = document.getElementById("editClubName").value;
     const logo = document.getElementById("editLogoUrl").value;
     const pj = document.getElementById("editPJ").value;
-    const g = document.getElementById("editG").value;
+    const w = document.getElementById("editW").value;
     const e = document.getElementById("editE").value;
     const p = document.getElementById("editP").value;
     const gf = document.getElementById("editGF").value;
     const gc = document.getElementById("editGC").value;
     const dg = parseInt(gf) - parseInt(gc);
-    const points = parseInt(g) * 3 + parseInt(e);
+    const points = parseInt(w) * 3 + parseInt(e);
 
     const response = await fetch("./API/crud.php", {
         method: "PUT",
@@ -125,7 +125,7 @@ async function saveTeamEdits(event) {
             clubName: clubName,
             logoUrl: logo,
             played_games: pj,
-            goals: g,
+            wins: w,
             draws: e,
             lost: p,
             goals_in_favor: gf,
@@ -141,12 +141,14 @@ async function saveTeamEdits(event) {
         console.error("Error del servidor:", data);
         throw new Error(data.error || "Error desconocido");
     }
+
     await listMatches();
+
     document.getElementById("editTeamId").value = '';
     document.getElementById("editClubName").value = '';
     document.getElementById("editLogoUrl").value = '';
     document.getElementById("editPJ").value = '';
-    document.getElementById("editG").value = '';
+    document.getElementById("editW").value = '';
     document.getElementById("editE").value = '';
     document.getElementById("editP").value = '';
     document.getElementById("editGF").value = '';
@@ -161,17 +163,17 @@ async function showTeamInfo(id){
     const editClubName = document.getElementById("editClubName")
     const editLogoUrl = document.getElementById("editLogoUrl")
     const editPJ = document.getElementById("editPJ")
-    const editG = document.getElementById("editG")
+    const editG = document.getElementById("editW")
     const editE = document.getElementById("editE")
     const editP = document.getElementById("editP")
     const editGF = document.getElementById("editGF")
     const editGC = document.getElementById("editGC")
-    
-    editTeamId.value = data.id;
+
+    editTeamId.value = id;
     editClubName.value = data.Club;
     editLogoUrl.value = data.logo;
     editPJ.value = data.played_games;
-    editG.value = data.goals;
+    editG.value = data.wins;
     editE.value = data.draws;
     editP.value = data.lost;
     editGF.value = data.goals_in_favor;

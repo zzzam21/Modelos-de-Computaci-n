@@ -20,7 +20,7 @@
 
                 } else {
 
-                    $myQuery = $myPDO->prepare("SELECT * FROM partidos ORDER BY points DESC");
+                    $myQuery = $myPDO->prepare("SELECT * FROM partidos ORDER BY points DESC, goals_diference DESC, goals_in_favor DESC");
                 
                     if (!$myQuery->execute()) {
                         throw new Exception("Error al ejecutar: " . implode(", ", $myQuery->errorInfo()));
@@ -62,6 +62,7 @@
                     Club = :club, 
                     logo = :logo, 
                     played_games = :played, 
+                    wins = :wins,
                     draws = :draws, 
                     lost = :lost, 
                     goals_in_favor = :goals_in_favor, 
@@ -74,6 +75,7 @@
                     ':club' => $data['clubName'],
                     ':logo' => $data['logoUrl'],
                     ':played' => $data['played_games'],
+                    ':wins' => $data['wins'],
                     ':draws' => $data['draws'],
                     ':lost' => $data['lost'],
                     ':goals_in_favor' => $data['goals_in_favor'],

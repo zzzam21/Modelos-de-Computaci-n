@@ -88,8 +88,8 @@
         </div>
 
         <div class="col">
-            <label for="editG"><b>Ganados:</b></label>
-            <input type="text" id="editG" placeholder="20" name="editG" required>
+            <label for="editW"><b>Ganados:</b></label>
+            <input type="text" id="editW" placeholder="20" name="editW" required>
         </div>
 
         <div class="col">
