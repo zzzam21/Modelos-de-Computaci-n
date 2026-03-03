@@ -2,7 +2,7 @@ const tableMatches = document.getElementById('tableMatches');
 
 async function listMatches() {
     try {
-        const response = await fetch("./API/crud.php", {
+        const response = await fetch("./api/crud.php", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -57,7 +57,7 @@ async function addTeam(event) {
     const clubName = document.getElementById('clubName').value;
     const logoUrl = document.getElementById('logoUrl').value;
 
-    const response = await fetch("./API/crud.php", {
+    const response = await fetch("./api/crud.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"},
@@ -103,7 +103,7 @@ async function deleteTeam(id) {
 
     if (!result.isConfirmed) return;
 
-    const response = await fetch(`./API/crud.php`, {
+    const response = await fetch(`./api/crud.php`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -149,7 +149,7 @@ async function saveTeamEdits(event) {
         return;
     }
 
-    const response = await fetch("./API/crud.php", {
+    const response = await fetch("./api/crud.php", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -217,7 +217,7 @@ async function showTeamInfo(id){
 }
 
 async function getTeam(id) {
-    const response = await fetch(`./API/crud.php?id=${id}`, {
+    const response = await fetch(`./api/crud.php?id=${id}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
