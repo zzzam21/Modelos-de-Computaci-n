@@ -30,7 +30,7 @@ async function listMatches() {
             tableMatches.innerHTML += `
             <tr>
                 <td>${$i++}</td>
-                <td class="club-cell"><img src="${match.logo}" alt="logo" width="15px"> ${match.Club}</td>
+                <td class="club-cell"><img src="${match.logo}" alt="" width="15px"> ${match.Club}</td>
                 <td>${match.played_games}</td>
                 <td>${match.wins}</td>
                 <td>${match.draws}</td>
@@ -79,9 +79,30 @@ async function addTeam(event) {
     document.getElementById('clubName').value = "";
     document.getElementById('logoUrl').value = "";
     document.getElementById('addTeamModal').close();
+
+    await Swal.fire({
+        icon: 'success',
+        title: 'Actualizado',
+        text: 'Equipo agregado correctamente',
+        timer: 2000,
+        showConfirmButton: false
+    });
 }
 
 async function deleteTeam(id) {
+
+    const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Este equipo será eliminado permanentemente',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    });
+
+    if (!result.isConfirmed) return;
 
     const response = await fetch(`./API/crud.php`, {
         method: "DELETE",
@@ -98,6 +119,7 @@ async function deleteTeam(id) {
         throw new Error(data.error || "Error desconocido");
     }
     await listMatches();
+
 }
 
 async function saveTeamEdits(event) {
@@ -114,6 +136,17 @@ async function saveTeamEdits(event) {
     const gc = document.getElementById("editGC").value;
     const dg = parseInt(gf) - parseInt(gc);
     const points = parseInt(w) * 3 + parseInt(e);
+
+    if (w + e + p < pj) {
+        cleanInputFields();
+        await Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La cantidad de partidos jugados no puede ser menor que la suma de ganados, empatados y perdidos.',
+            showConfirmButton: true
+        });
+        return;
+    }
 
     const response = await fetch("./API/crud.php", {
         method: "PUT",
@@ -143,17 +176,17 @@ async function saveTeamEdits(event) {
     }
 
     await listMatches();
+    
+    cleanInputFields();
 
-    document.getElementById("editTeamId").value = '';
-    document.getElementById("editClubName").value = '';
-    document.getElementById("editLogoUrl").value = '';
-    document.getElementById("editPJ").value = '';
-    document.getElementById("editW").value = '';
-    document.getElementById("editE").value = '';
-    document.getElementById("editP").value = '';
-    document.getElementById("editGF").value = '';
-    document.getElementById("editGC").value = '';
-    document.getElementById("editTeamModal").close();
+    await Swal.fire({
+        icon: 'success',
+        title: 'Actualizado',
+        text: 'Equipo actualizado correctamente',
+        timer: 1500,
+        showConfirmButton: false
+    });
+
 }
 
 async function showTeamInfo(id){
@@ -200,5 +233,17 @@ async function getTeam(id) {
     return data;
 }
 
+async function cleanInputFields() {
+    document.getElementById("editTeamId").value = '';
+    document.getElementById("editClubName").value = '';
+    document.getElementById("editLogoUrl").value = '';
+    document.getElementById("editPJ").value = '';
+    document.getElementById("editW").value = '';
+    document.getElementById("editE").value = '';
+    document.getElementById("editP").value = '';
+    document.getElementById("editGF").value = '';
+    document.getElementById("editGC").value = '';
+    document.getElementById("editTeamModal").close();
+}
 // Ejecutar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', listMatches);
