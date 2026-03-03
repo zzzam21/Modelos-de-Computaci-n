@@ -36,7 +36,7 @@
                         <th>GF</th>
                         <th>GC</th>
                         <th>DG</th>
-                        <th>Points</th>
+                        <th>Puntos</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
