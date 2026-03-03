@@ -3,46 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="assets/styles/styles.css">
     <title>La liga</title>
 </head>
 <body>
-
-    <div class="container">
+    <div class="content-wrapper" style="background-color: white;">
         
-        <div class="col">
-            <h1><span><img src="https://assets.laliga.com/assets/logos/LL_RGB_h_color/LL_RGB_h_color.png" alt="descripción" width="27px"></span>La Liga</h1>
-        </div>
+        <section class="content-header">
+            <div class="container-fluid">
+                <h1><span><img src="assets/img/LaLigaIcon.png" alt="descripción" width="27px"></span><b>Posiciones</b></h1>
+            </div>
+        </section>
 
-        <div class="col">
-            <form action="">
-                <input type="text" placeholder="Nombre del club">
-                <button class="delete-btn">Buscar <span><img src="https://img.icons8.com/?size=100&id=3HmnX1ym1BDx&format=png&color=FFFFFF" alt="Buscar" width="12px"></span></button>
-                <button type="button" class="edit-btn" id="openModal">Agregar</button>
-            </form>
-            
-        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <div class="col">
+                            <form action="">
+                                <input type="text" placeholder="Nombre del club">
+                                <button class="delete-btn">Buscar <span><img src="https://img.icons8.com/?size=100&id=3HmnX1ym1BDx&format=png&color=FFFFFF" alt="Buscar" width="12px"></span></button>
+                                <button type="button" class="edit-btn" id="openModal">Agregar</button>
+                            </form>
+                        </div>
+                        <div class="table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Pos</th>
+                                        <th class="club-cell">Club</th>
+                                        <th>Pj</th>
+                                        <th>G</th>
+                                        <th>E</th>
+                                        <th>P</th>
+                                        <th>GF</th>
+                                        <th>GC</th>
+                                        <th>DG</th>
+                                        <th>Puntos</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableMatches"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Pos</th>
-                        <th class="club-cell">Club</th>
-                        <th>Pj</th>
-                        <th>G</th>
-                        <th>E</th>
-                        <th>P</th>
-                        <th>GF</th>
-                        <th>GC</th>
-                        <th>DG</th>
-                        <th>Puntos</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tableMatches"></tbody>
-            </table>
-        </div>
     </div>
 
     <dialog id="addTeamModal">
@@ -118,9 +127,46 @@
         
     </dialog>
     
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="https://www.laliga.com/laliga-easports/clasificacion" class="brand-link">
+            <img src="assets/img/LaLigaIconWhite.png" class="brand-image" alt="" width="20px">
+            <span class="brand-text font-weight-bold"><b>La Liga</b></span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Posiciones</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Equipos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Partidos</p>
+                    </a>
+                </li>
+            </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
     <script src="assets/js/modal.js"></script>
     <script src="assets/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 </body>
 </html>
