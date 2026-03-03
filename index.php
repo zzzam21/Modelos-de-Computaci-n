@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="assets/styles/styles.css">
     <title>La liga</title>
 </head>
 <body>
@@ -11,6 +11,7 @@
     <?php include 'connectiondb.php';?>
 
     <div class="container">
+        
         <div class="col">
             <h1><span><img src="https://assets.laliga.com/assets/logos/LL_RGB_h_color/LL_RGB_h_color.png" alt="descripción" width="27px"></span>La Liga</h1>
         </div>
@@ -119,8 +120,9 @@
         
     </dialog>
     
-    <script src="js/modal.js"></script>
-    <script src="js/app.js"></script>
+    <script src="assets/js/modal.js"></script>
+    <script src="assets/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 </html>

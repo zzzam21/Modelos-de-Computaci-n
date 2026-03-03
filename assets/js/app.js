@@ -137,14 +137,16 @@ async function saveTeamEdits(event) {
     const dg = parseInt(gf) - parseInt(gc);
     const points = parseInt(w) * 3 + parseInt(e);
 
-    if (w + e + p < pj) {
+    if ( parseInt(pj) < (parseInt(w) + parseInt(e) + parseInt(p))) {
         cleanInputFields();
+        
         await Swal.fire({
             icon: 'error',
             title: 'Error',
             text: 'La cantidad de partidos jugados no puede ser menor que la suma de ganados, empatados y perdidos.',
             showConfirmButton: true
         });
+
         return;
     }
 
