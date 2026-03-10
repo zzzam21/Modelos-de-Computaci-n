@@ -6,7 +6,7 @@ async function listMatches() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
-            }
+            }   
         });
         
         if (!response.ok) {
@@ -39,8 +39,8 @@ async function listMatches() {
                 <td>${match.goals_diference}</td>
                 <td>${match.points}</td>
                 <td class="actions">
-                    <button class="edit-btn" onclick="showTeamInfo(${match.id})">Editar</button>
-                    <button class="delete-btn" onclick="deleteTeam(${match.id})">Eliminar</button>
+                    <button class="edit-btn" onclick="showTeamInfo(${match.id})"><i class="bi bi-pencil"></i></button>
+                    <button class="delete-btn" onclick="deleteTeam(${match.id})"><i class="bi bi-trash"></i></button>
                 </td>
             </tr>
             `
@@ -127,27 +127,7 @@ async function saveTeamEdits(event) {
     const id = document.getElementById("editTeamId").value;
     const clubName = document.getElementById("editClubName").value;
     const logo = document.getElementById("editLogoUrl").value;
-    const pj = document.getElementById("editPJ").value;
-    const w = document.getElementById("editW").value;
-    const e = document.getElementById("editE").value;
-    const p = document.getElementById("editP").value;
-    const gf = document.getElementById("editGF").value;
-    const gc = document.getElementById("editGC").value;
-    const dg = parseInt(gf) - parseInt(gc);
-    const points = parseInt(w) * 3 + parseInt(e);
-
-    if ( parseInt(pj) < (parseInt(w) + parseInt(e) + parseInt(p))) {
-        cleanInputFields();
-        
-        await Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'La cantidad de partidos jugados no puede ser menor que la suma de ganados, empatados y perdidos.',
-            showConfirmButton: true
-        });
-
-        return;
-    }
+    
 
     const response = await fetch("./api/crud.php", {
         method: "PUT",
@@ -157,15 +137,7 @@ async function saveTeamEdits(event) {
         body: JSON.stringify({
             id: id,
             clubName: clubName,
-            logoUrl: logo,
-            played_games: pj,
-            wins: w,
-            draws: e,
-            lost: p,
-            goals_in_favor: gf,
-            goals_against: gc,
-            goals_diference: dg,
-            points: points
+            logoUrl: logo
         })
     });
 
@@ -179,7 +151,7 @@ async function saveTeamEdits(event) {
     await listMatches();
     
     cleanInputFields();
-
+    document.getElementById("editTeamModal").close();
     await Swal.fire({
         icon: 'success',
         title: 'Actualizado',
@@ -196,22 +168,12 @@ async function showTeamInfo(id){
     const editTeamId = document.getElementById("editTeamId");
     const editClubName = document.getElementById("editClubName")
     const editLogoUrl = document.getElementById("editLogoUrl")
-    const editPJ = document.getElementById("editPJ")
-    const editG = document.getElementById("editW")
-    const editE = document.getElementById("editE")
-    const editP = document.getElementById("editP")
-    const editGF = document.getElementById("editGF")
-    const editGC = document.getElementById("editGC")
+    
 
     editTeamId.value = id;
     editClubName.value = data.Club;
     editLogoUrl.value = data.logo;
-    editPJ.value = data.played_games;
-    editG.value = data.wins;
-    editE.value = data.draws;
-    editP.value = data.lost;
-    editGF.value = data.goals_in_favor;
-    editGC.value = data.goals_against;
+    
 
     document.getElementById("editTeamModal").showModal();
 }

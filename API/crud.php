@@ -1,7 +1,8 @@
 <?php
     header ("Content-Type: application/json");
     include '../config/connectiondb.php';
-    
+    include 'functions.php';
+
     try {
         $method = $_SERVER['REQUEST_METHOD'];
         $data = json_decode(file_get_contents('php://input'), true);
@@ -60,28 +61,12 @@
                     UPDATE partidos 
                     SET 
                     Club = :club, 
-                    logo = :logo, 
-                    played_games = :played, 
-                    wins = :wins,
-                    draws = :draws, 
-                    lost = :lost, 
-                    goals_in_favor = :goals_in_favor, 
-                    goals_against = :goals_against, 
-                    goals_diference = :goals_diference, 
-                    points = :points
+                    logo = :logo
                     WHERE id = :id");
                 
                 $success = $myQuery->execute([
                     ':club' => $data['clubName'],
                     ':logo' => $data['logoUrl'],
-                    ':played' => $data['played_games'],
-                    ':wins' => $data['wins'],
-                    ':draws' => $data['draws'],
-                    ':lost' => $data['lost'],
-                    ':goals_in_favor' => $data['goals_in_favor'],
-                    ':goals_against' => $data['goals_against'],
-                    ':goals_diference' => $data['goals_diference'],
-                    ':points' => $data['points'],
                     ':id' => $data['id']
                 ]);
 
@@ -102,10 +87,12 @@
                 if (!$success) {
                     throw new Exception("Error SQL: " . implode(", ", $myQuery->errorInfo()));
                 }
-
+                
+                recalcularPosiciones($myPDO);
+               
                 http_response_code(200);
                 echo json_encode(["message" => "Equipo eliminado correctamente"]);
-
+                
                 break;
 
             default:
