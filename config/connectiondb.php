@@ -1,5 +1,5 @@
 <?php
-    $hostDB = "127.0.0.1";  
+    $hostDB = "db";  
     $nameDB = "futbol_db";
     $user = "samu";
     $pwDB = 'Udenar12345@';

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  
+  db:
+    image: mysql:8.0
+    container_name: mysql_futbol
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: futbol_db
+      MYSQL_USER: samu
+      MYSQL_PASSWORD: Udenar12345@
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  app:
+    build: .
+    container_name: php_futbol
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: samu
+      DB_PASSWORD: Udenar12345@
+      DB_NAME: futbol_db
+
+volumes:
+  db_data:

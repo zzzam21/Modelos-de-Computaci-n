@@ -19,6 +19,7 @@
         </section>
 
         <section class="content">
+            <!-- Tabla de posiciones -->
             <div class="content-view" id="view-positions">
                 <div class="container-fluid">
                     <div class="row">
@@ -54,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Tabla de enfrentamientos -->
             <div class="content-view" id="view-matches" style="display: none;">
                 <div class="container-fluid">
                 <div class="row">
@@ -69,11 +71,13 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">Fecha</th>
-                                        <th class="text-right">Equipo 1</th>
-                                        <th class="text-center">Goles</th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Local</th>
+                                        <th class="text-center"></th>
                                         <th class="text-center">vs</th>
-                                        <th class="text-center">Goles</th>
-                                        <th class="text-left">Equipo 2</th>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">Visitante</th>
+                                        <th></th>
                                         <th class="text-center">Estado</th>
                                         <th class="text-center">Acciones</th>
                                     </tr>
@@ -86,9 +90,7 @@
                 </div>
             </div>
         </section>
-
     </div>
-
 
     <!-- Modals matches -->
     <!-- Añadir enfrentamiento -->
@@ -135,6 +137,7 @@
             <div class="score-container" style="display: flex; align-items: center; justify-content: space-around; padding: 20px;">
                 <div class="team-label text-center">
                     <p id="labelTeam1" style="font-weight: bold;"></p>
+                    <span id="iconTeam1"></span>
                     <input type="number" id="editGoals1" min="0" required class="form-control" style="width: 80px; text-align: center; font-size: 1.5rem;">
                 </div>
 
@@ -142,6 +145,7 @@
 
                 <div class="team-label text-center">
                     <p id="labelTeam2" style="font-weight: bold;"></p>
+                    <span id="iconTeam2"></span>
                     <input type="number" id="editGoals2" min="0" required class="form-control" style="width: 80px; text-align: center; font-size: 1.5rem;">
                 </div>
             </div>

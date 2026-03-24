@@ -14,7 +14,7 @@
                     $myQuery->execute([':id' => $_GET['id']]);
                     $result = $myQuery->fetch(PDO::FETCH_ASSOC);
                 } else {
-                    $sql = "SELECT m.*, t1.Club as name_team1, t2.Club as name_team2 
+                    $sql = "SELECT m.*, t1.Club as name_team1, t2.Club as name_team2 , t1.logo as logo_team1, t2.logo as logo_team2
                             FROM matches m
                             JOIN partidos t1 ON m.id_team1 = t1.id
                             JOIN partidos t2 ON m.id_team2 = t2.id

@@ -7,7 +7,7 @@ async function listGames() {
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         
         const data = await response.json();
-        // Ajustamos para manejar la estructura de datos que devuelve tu PHP
+        
         const games = Array.isArray(data) ? data : (data.datos || []);
         
         if (games.length === 0) {
@@ -17,17 +17,19 @@ async function listGames() {
 
         tableGamesList.innerHTML = "";
         games.forEach(game => {
-            // Determinamos el color del badge según el status
+            
             const statusBadge = game.status === 'finalizado' ? 'badge-success' : 'badge-warning';
 
             tableGamesList.innerHTML += `
             <tr>
                 <td class="text-center">${game.match_date}</td>
-                <td class="text-right"><strong>${game.name_team1}</strong></td>
+                <td class="text-right"><img src="${game.logo_team1}" width="20px"></img></td>
+                <td class="text-left"><strong>${game.name_team1}</strong></td>
                 <td class="text-center"><span class="badge badge-dark">${game.goals_team1}</span></td>
                 <td class="text-center">vs</td>
                 <td class="text-center"><span class="badge badge-dark">${game.goals_team2}</span></td>
-                <td class="text-left"><strong>${game.name_team2}</strong></td>
+                <td class="text-right"><strong>${game.name_team2}</strong></td>
+                <td class="text-right"><img src="${game.logo_team2}" width="20px"></img></td>
                 <td class="text-center"><span class="badge ${statusBadge}">${game.status}</span></td>
                 <td class="text-center">
                     <button class="edit-btn" onclick="showGameInfo(${game.id_match})"><i class="bi bi-pencil"></i></button>
@@ -119,14 +121,14 @@ async function deleteGame(id) {
     if (response.ok) {
         await listGames();
         if (typeof listMatches === "function") listMatches(); 
-        Swal.fire('Eliminado', 'El partido ha sido quitado', 'success');
+        Swal.fire('Eliminado', 'El partido ha sido eliminado!', 'success');
     }
 }
 
 // Función para llenar los selectores de equipos
 async function loadTeamsToSelect() {
     try {
-        const response = await fetch("./api/crud.php"); // Usamos tu API de equipos
+        const response = await fetch("./api/crud.php"); // API de equipos
         const data = await response.json();
         const teams = Array.isArray(data) ? data : data.datos;
 
@@ -150,7 +152,12 @@ async function loadTeamsToSelect() {
 async function showGameInfo(id_match) {
     try {
         // Obtenemos los datos del partido específico desde el servidor
-        const response = await fetch(`./api/crud_matches.php?id=${id_match}`);
+        const response = await fetch(`./api/crud_matches.php?id=${id_match}`, 
+                                    {method: 'GET',
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                       }
+                                    });
         const game = await response.json();
 
         if (!response.ok) throw new Error("No se pudo obtener la información del partido");
@@ -159,6 +166,10 @@ async function showGameInfo(id_match) {
         document.getElementById("editMatchId").value = game.id_match;
         document.getElementById("labelTeam1").innerText = game.name_team1 || "Local";
         document.getElementById("labelTeam2").innerText = game.name_team2 || "Visitante";
+
+        document.getElementById("iconTeam1").innerHTML = `<img src="${game.logo_team1}" alt="" width="15px"></img>`;
+        document.getElementById("iconTeam2").innerHTML = `<img src="${game.logo_team2}" alt="" width="15px"></img>`;
+
         
         // Ponemos los goles actuales (por si se quiere corregir)
         document.getElementById("editGoals1").value = game.goals_team1;
@@ -166,6 +177,7 @@ async function showGameInfo(id_match) {
 
         // Abrimos el modal
         document.getElementById("editMatchModal").showModal();
+
     } catch (error) {
         console.error("Error:", error);
         Swal.fire('Error', 'No se pudo cargar la información del partido', 'error');
